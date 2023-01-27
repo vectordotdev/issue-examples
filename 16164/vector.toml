@@ -1,0 +1,34 @@
+[sources.demo_logs]
+type                    = "demo_logs"
+format                  = "json"
+
+[sources.http]
+type                    = "http_server"
+address                 = "0.0.0.0:7000"
+encoding                = "text"
+path                    = "/services/collector/event"
+tls.enabled             = true
+tls.crt_file            = "/config/cert.pem"
+tls.key_file            = "/config/key.pem"
+tls.key_pass            = "password"
+
+[sinks.messages_sink]
+type                    = "splunk_hec_logs"
+inputs                  = ["demo_logs"]
+endpoint                = "https://localhost:7000"
+endpoint_target         = "event"
+index                   = "messages"
+default_token           = "999999-00000-99999-9999"
+tls.verify_certificate  = false # This is the property that was flipped from true to false
+tls.verify_hostname     = false # Same as above
+
+[sinks.messages_sink.encoding]
+codec                   = "json"
+
+[sinks.console]
+type                    = "console"
+inputs                  = ["http"]
+target                  = "stdout"
+
+[sinks.console.encoding]
+codec                   = "json"
