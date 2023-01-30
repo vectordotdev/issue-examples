@@ -1,0 +1,22 @@
+[sources.userpackets]
+type = "stdin"
+max_length = 1_024
+
+[transforms.jsonize]
+type = "remap"
+inputs = ["userpackets"]
+source = """
+  . |= object!(parse_json!(.message))
+  del(.message)
+"""
+
+[transforms.rrr]
+type = "reduce"
+inputs = ["jsonize"]
+group_by = ["user"]
+expire_after_ms = 10_000
+
+[sinks.print]
+inputs = ["rrr"]
+type = "console"
+encoding.codec = "json"

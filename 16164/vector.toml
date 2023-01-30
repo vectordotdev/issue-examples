@@ -15,7 +15,7 @@ tls.key_pass            = "password"
 [sinks.messages_sink]
 type                    = "splunk_hec_logs"
 inputs                  = ["demo_logs"]
-endpoint                = "https://localhost:7000"
+ndpoint                = "https://localhost:7000"
 endpoint_target         = "event"
 index                   = "messages"
 default_token           = "999999-00000-99999-9999"
