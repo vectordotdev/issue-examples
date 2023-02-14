@@ -1,0 +1,16 @@
+api:
+  enabled: true
+sources:
+  datadog_agent:
+    type: datadog_agent
+    address: 0.0.0.0:8226
+    multiple_outputs: true
+    store_api_key: false
+sinks:
+  datadog_metrics:
+    type: datadog_metrics
+    inputs:
+      - datadog_agent.metrics
+    default_api_key: ${DD_API_KEY}
+    acknowledgements:
+      enabled: true

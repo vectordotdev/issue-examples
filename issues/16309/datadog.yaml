@@ -1,0 +1,10 @@
+vector:
+  logs:
+    enabled: true
+    url: "http://localhost:8226"
+  metrics:
+    enabled: true
+    url: "http://localhost:8226"
+  traces:
+    enabled: true
+    url: "http://localhost:8226"
