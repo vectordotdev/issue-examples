@@ -1,0 +1,14 @@
+data_dir = "/tmp/vector/"
+
+[sources.vdc]
+type = "http_server"
+address = "0.0.0.0:8181"
+encoding = "binary"
+method = "GET"
+strict_path = false
+path = "/tmp/foo"
+
+[sinks.sink1]
+type = "blackhole"
+inputs = [ "vdc" ]
+print_interval_secs = 10
