@@ -1,0 +1,27 @@
+data_dir = "/tmp/vector"
+enrichment_tables.geoip.path="/tmp/vector/vector.mmdb"
+enrichment_tables.geoip.type = "geoip"
+
+[sources.in]
+type = "stdin"
+
+[transforms.foo]
+type="remap"
+inputs=["in"]
+source='''
+result, e = get_enrichment_table_record("geoip", {"ip":.source_ip})
+if e == null {
+.geoip = result
+}
+'''
+
+[transforms.bar]
+type = "remap"
+inputs = ["foo"]
+source = '''
+.
+'''
+
+[sinks.blackhole]
+type = "blackhole"
+inputs = [ "bar" ]

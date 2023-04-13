@@ -8,3 +8,4 @@ To aid in discovery of configurations, please add to this table when adding a ne
 | 16145           | `stdin`, `remap`, `reduce`            |                                    |
 | 16164           | `http_server`, `splunk_hec_logs`      |                                    |
 | 16309           | `datadog_agent`, `datadog_metrics`    | component_events                   |
+| 17115           | `remap`                               | enrichment_table                   |
