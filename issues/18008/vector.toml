@@ -1,0 +1,24 @@
+[api]
+enabled = true
+
+[sources.in]
+type = "socket"
+mode = "tcp"
+address = "0.0.0.0:5555"
+decoding.codec = "json"
+
+# [sources.stdin]
+# type = "stdin"
+# decoding.codec = "json"
+
+[sinks.out]
+type = "socket"
+inputs = [ "in" ]
+mode = "tcp"
+address = "localhost:12201"
+
+[sinks.out.encoding]
+codec = "gelf"
+except_fields = [ "timestamp_end", "file" ]
+framing.method = "character_delimited"
+framing.character_delimited.delimiter = "\u0000"
