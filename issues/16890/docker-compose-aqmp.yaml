@@ -1,0 +1,11 @@
+version: "3"
+services:
+  rabbit:
+    image: rabbitmq:3.11-management-alpine
+    ports:
+    - "5671:5671"
+    volumes:
+      - /Users/pavlos.rontidis/rabbitmq/certificates/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - /Users/pavlos.rontidis/rabbitmq/certificates/certificates/ca_certificate.pem:/etc/ssl/rabbit/cacert.pem
+      - /Users/pavlos.rontidis/rabbitmq/certificates/certificates/server_certificate.pem:/etc/ssl/rabbit/cert.pem
+      - /Users/pavlos.rontidis/rabbitmq/certificates/certificates/server_key.pem:/etc/ssl/rabbit/key.pem
