@@ -1,0 +1,33 @@
+# Set global options
+data_dir = "/var/lib/vector"
+timezone = "UTC"
+
+[api]
+enabled = true
+address = "127.0.0.1:8686"
+
+[sources.internal_metrics]
+type = "internal_metrics"
+scrape_interval_secs = 1
+
+[transforms.m2l]
+type = "metric_to_log"
+inputs = ["internal_metrics"]
+host_tag = "host"
+
+[sinks.amqp_collector]
+type = "amqp"
+inputs = ["m2l"]
+connection_string = "amqps://test:test@localhost?timeout=10"
+exchange = "test"
+
+[sinks.amqp_collector.tls]
+# Change these paths
+ca_file = "path/to/certificates/ca_certificate.crt"
+crt_file = "path/to/client_COMP-LPF0JYPP2Q_certificate.crt"
+key_file = "path/to/certificates/client_COMP-LPF0JYPP2Q_key.crt"
+verify_certificate = true
+verify_hostname = true
+
+[sinks.amqp_collector.encoding]
+codec = "json"
