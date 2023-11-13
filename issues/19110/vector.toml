@@ -1,0 +1,20 @@
+data_dir = "/tmp/vector"
+
+[api]
+enabled = true
+
+[sources.in]
+type = "statsd"
+address = "0.0.0.0:9000"
+mode = "tcp"
+path = "/tmp/tmp.socket"
+
+[sinks.dd]
+inputs = [ "in" ]
+type = "datadog_metrics"
+default_api_key="${TEST_DATADOG_API_KEY}"
+batch.max_events = 8000
+batch.timeout_secs = 999999
+buffer.type =  "disk"
+buffer.max_size = 4294967296
+buffer.when_full = "drop_newest"
