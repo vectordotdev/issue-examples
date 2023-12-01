@@ -1,0 +1,20 @@
+sources:
+  in:
+    type: demo_logs
+    format: apache_common
+    lines:
+      - line1
+transforms:
+  remapped:
+    type: remap
+    inputs: [ in ]
+    source: ".event = .message"
+sinks:
+  tty_proto:
+    type: console
+    inputs: [ remapped ]
+    encoding:
+      codec: protobuf
+      protobuf:
+        desc_file: /Users/pavlos.rontidis/CLionProjects/vector/pront_tests/vector/configs/proto/message.desc
+        message_type: test.SessionEvent
