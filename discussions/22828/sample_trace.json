@@ -1,0 +1,52 @@
+{
+  "agent_version": "7.64.2",
+  "app_version": "",
+  "container_id": "",
+  "dropped": false,
+  "env": "none",
+  "error_tps": 10.0,
+  "host": "COMP-LPF0JYPP2Q",
+  "language_name": "python",
+  "language_version": "3.13.2",
+  "origin": "",
+  "payload_version": "v2",
+  "priority": 1,
+  "runtime_id": "",
+  "source_type": "datadog_agent",
+  "spans": [
+    {
+      "duration": 143000,
+      "error": 0,
+      "meta": {
+        "_dd.base_service": "dd_agent_experiments",
+        "_dd.p.dm": "-1",
+        "_dd.p.tid": "680fa1cb00000000",
+        "env": "local",
+        "language": "python",
+        "runtime-id": "82717a8737724f0386a63c600b97fa9a"
+      },
+      "meta_struct": {},
+      "metrics": {
+        "_dd.agent_psr": 1.0,
+        "_dd.top_level": 1.0,
+        "_dd.tracer_kr": 1.0,
+        "_sampling_priority_v1": 1.0,
+        "_top_level": 1.0,
+        "process_id": 21657.0
+      },
+      "name": "fake.span",
+      "parent_id": 0,
+      "resource": "GET /example",
+      "service": "pront",
+      "span_id": 3219334290885736623,
+      "start": "2025-04-28T15:42:03.831632Z",
+      "trace_id": -3530690826213928959,
+      "type": ""
+    }
+  ],
+  "tags": {
+    "_dd.p.dm": "-1"
+  },
+  "target_tps": 10.0,
+  "tracer_version": "3.5.1"
+}
