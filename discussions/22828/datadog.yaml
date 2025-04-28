@@ -1,0 +1,95 @@
+###########################
+## Dogfood Configuration ##
+###########################
+
+## @param api_key - string - required
+## @env DD_API_KEY - string - required
+## The Datadog API key used by your Agent to submit metrics and events to Datadog.
+## Create a new API key here: https://app.datadoghq.com/organization-settings/api-keys .
+## Read more about API keys here: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
+
+# If you want to add your own dogfood key in paralel to the Enterprise IT configuration, simply add your api_key string below this comment and restart the agent using launchctl
+# Command reference available at https://docs.datadoghq.com/agent/basic_agent_usage/osx/?tab=agentv6v7#commands
+
+#api_key: DD_API_KEY
+
+## Enterprise IT specifics ###############################
+expvar_port: 5050
+cmd_port: 5051
+GUI_port: 5052
+
+##########################################################
+
+##################################
+## Log collection Configuration ##
+##################################
+
+## @param logs_enabled - boolean - optional - default: false
+## @env DD_LOGS_ENABLED - boolean - optional - default: false
+## Enable Datadog Agent log collection by setting logs_enabled to true.
+
+## Enterprise IT specifics ###############################
+logs_enabled: true
+logs_config:
+  use_http: true
+#  additional_endpoints:
+#  - api_key: DD_API_KEY
+#    Host: "agent-http-intake.logs.datadoghq.com"
+#    Port: 443
+#    is_reliable: true
+##########################################################
+
+######################################
+## Process Collection Configuration ##
+######################################
+
+## @param process_config - custom object - optional
+## Enter specific configurations for your Process data collection.
+## Uncomment this parameter and the one below to enable them.
+## See https://docs.datadoghq.com/graphing/infrastructure/process/
+#
+#process_config:
+#   process_collection:
+#     enabled: true
+### Enterprise IT specifics ###############################
+#   expvar_port: 6072
+#   cmd_port: 6172
+#   additional_endpoints:
+#    "https://process.datadoghq.com": [DD_API_KEY]
+###########################################################
+
+# Enterprise IT - Enable dogstatsd on a different port
+# Enable dogstatsd
+use_dogstatsd: true
+dogstatsd_port: 8135
+
+# Enterprise IT is enabling APM, not using the default port so we can monitor performance of internal applications in the future
+# Enable APM
+apm_config:
+  enabled: true
+  receiver_port: 8136
+#  additional_endpoints:
+#   "https://trace.agent.datadoghq.com": [DD_API_KEY]
+#  profiling_additional_endpoints:
+#   "https://intake.profile.datadoghq.com/api/v2/profile": [DD_API_KEY]
+
+# Enterprise IT tag information
+hostname: COMP-LPF0JYPP2Q
+tags: ["agent_type:native", "dmi.product.serial_number:LPF0JYPP2Q", "operatingsystem:macOS", "operatingsystemrelease:15.3.1", "service:datadog-agent", "team:enterprise-it-operations-endpoints", "device_model:MacBook Pro (14-inch, 2021)", "department:Engineering", "memory:64GB", "ssd_capacity:1TB", "SOC:Apple M1 Max"]
+
+# Added in Jan 2024 - https://datadoghq.atlassian.net/browse/EITOE-915
+run_path: "/opt/datadog-agent/it-run-path"
+
+vector:
+# Focusing on traces only for this example.
+#   metrics:
+#     enabled: true
+#     url: http://127.0.0.1:8137
+#
+#   logs:
+#     enabled: true
+#     url: http://127.0.0.1:8137
+
+   traces:
+     enabled: true
+     url: http://127.0.0.1:8137

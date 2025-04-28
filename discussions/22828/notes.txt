@@ -1,0 +1,9 @@
+2025-04-28T15:42:12.568684Z DEBUG http: vector::internal_events::http_client: Sending HTTP request. uri=https://trace.agent.datadoghq.com/api/v0.2/stats method=POST version=HTTP/1.1 headers={"content-encoding": "gzip", "content-type": "application/msgpack", "dd-api-key": "REDACTED_MY_DD_API_KEY", "user-agent": "Vector/0.47.0-custom-1e7da76fc (aarch64-apple-darwin debug=full)", "accept-encoding": "identity"} body=[415 bytes]
+2025-04-28T15:42:12.568822Z TRACE http: hyper::client::pool: take? ("https", trace.agent.datadoghq.com): expiration = Some(90s)
+2025-04-28T15:42:12.568851Z DEBUG http: hyper::client::pool: reuse idle connection for ("https", trace.agent.datadoghq.com)
+2025-04-28T15:42:12.568958Z TRACE encode_headers: hyper::proto::h1::role: Client::encode method=POST, body=Some(Known(415))
+2025-04-28T15:42:12.569003Z TRACE hyper::proto::h1::io: buffer.flatten self.len=297 buf.len=415
+2025-04-28T15:42:12.569102Z DEBUG hyper::proto::h1::io: flushed 712 bytes
+2025-04-28T15:42:12.569114Z TRACE hyper::proto::h1::conn: flushed({role=client}): State { reading: Init, writing: KeepAlive, keep_alive: Busy }
+
+2025-04-28T15:42:12.910271Z TRACE source{component_kind="source" component_id=dd_agent component_type=datadog_agent}:http-request{method=POST path=/api/v0.2/traces}: warp::filters::method: method::POST?: POST

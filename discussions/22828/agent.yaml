@@ -1,0 +1,34 @@
+sources:
+  dd_agent:
+    type: datadog_agent
+    address: 127.0.0.1:8137
+    multiple_outputs: true
+
+sinks:
+# Focusing on traces only for this example.
+#  logs_sink:
+#    type: datadog_logs
+#    inputs:
+#      - dd_agent.logs
+#    default_api_key: ${DD_API_KEY}
+#
+#  metrics_sink:
+#    type: datadog_metrics
+#    inputs:
+#      - dd_agent.metrics
+#    default_api_key: ${DD_API_KEY}
+
+  traces_sink:
+    type: datadog_traces
+    inputs:
+      - dd_agent.traces
+    default_api_key: ${DD_API_KEY}
+
+  console:
+    type: console
+    inputs:
+      - dd_agent.traces
+    encoding:
+      codec: json
+      json:
+        pretty: true
