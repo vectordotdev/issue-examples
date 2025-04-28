@@ -20,6 +20,10 @@ Monitor the agent:
 datadog-agent launch-gui
 ```
 
+Agent Status:
+
+![Datadog Agent Status GUI](./dd-agent-apm-status.png)
+
 Start a Vector instance:
 
 ```shell
