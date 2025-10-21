@@ -1,0 +1,41 @@
+services:
+  otel-collector-source:
+    image: otel/opentelemetry-collector:latest
+    container_name: otel-collector-source
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./otel-collector-source.yaml:/etc/otel-collector-config.yaml
+    ports:
+      - "4317:4317"   # OTLP gRPC receiver
+      - "4318:4318"   # OTLP HTTP receiver
+    networks:
+      - otel-network
+
+  vector:
+    image: timberio/vector:nightly-alpine
+    container_name: vector
+    volumes:
+      - ./vector.yaml:/etc/vector/vector.yaml:ro
+    command: ["--config", "/etc/vector/vector.yaml"]
+    ports:
+      - "4320:4320"   # OTLP HTTP receiver from OTEL collector
+    depends_on:
+      - otel-collector-source
+      - otel-collector-sink
+    networks:
+      - otel-network
+
+  otel-collector-sink:
+    image: otel/opentelemetry-collector:latest
+    container_name: otel-collector-sink
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./otel-collector-sink.yaml:/etc/otel-collector-config.yaml
+    ports:
+      - "5318:5318"   # OTLP HTTP receiver from Vector
+    networks:
+      - otel-network
+
+networks:
+  otel-network:
+    driver: bridge
