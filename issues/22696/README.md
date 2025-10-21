@@ -21,10 +21,12 @@ docker-compose down 2>/dev/null || true
 docker-compose up -d
 
 # Wait for services to be ready
-sleep 5
+sleep 2
 
 # Send test logs
 telemetrygen logs --otlp-insecure --otlp-http --logs=100 --rate=0
+
+sleep 2
 
 # Check logs for the error
 docker-compose logs otel-collector-source
