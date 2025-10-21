@@ -1,0 +1,32 @@
+receivers:
+  otlp:
+    protocols:
+      http:
+        endpoint: "0.0.0.0:4318"
+      grpc:
+        endpoint: 0.0.0.0:4317
+
+processors:
+  batch: { }
+
+exporters:
+  debug:
+    verbosity: detailed
+    sampling_initial: 100
+    sampling_thereafter: 100
+
+  file:
+    path: /output/received-from-telemetrygen.json
+    format: json
+
+  otlphttp:
+    endpoint: http://vector:4320
+    tls:
+      insecure: true
+
+service:
+  pipelines:
+    logs:
+      receivers: [ otlp ]
+      processors: [ batch ]
+      exporters: [ debug, file, otlphttp ]
