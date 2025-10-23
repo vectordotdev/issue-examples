@@ -19,3 +19,8 @@ Cargo.lock
 *.iml
 out
 gen
+
+# OTEL collector output
+issues/22696/output/
+
+.claude
